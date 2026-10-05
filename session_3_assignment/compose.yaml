@@ -1,0 +1,32 @@
+services:
+  financial-advisor:
+    build: .
+    container_name: financial-advisor-dev
+
+    ports:
+      - "8010:8000"
+
+    env_file:
+      - .env
+
+    environment:
+      DB_HOST: host.docker.internal
+      PHOENIX_ENDPOINT: http://host.docker.internal:6006/v1/traces
+      WATCHFILES_FORCE_POLLING: "true"
+
+    volumes:
+      - ./app:/app/app
+      - ./Apex_Financial_Risk_Policy_2026.pdf:/app/Apex_Financial_Risk_Policy_2026.pdf:ro
+
+    command:
+      [
+        "python",
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--reload"
+      ]

@@ -1,0 +1,13 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+.pytest_cache
+*.pyc
+*.pyo
+secret.yaml
+
+# Environment variables
+.env

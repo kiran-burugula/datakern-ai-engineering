@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: financial-advisor
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: financial-advisor
+
+  template:
+    metadata:
+      labels:
+        app: financial-advisor
+
+    spec:
+      containers:
+        - name: financial-advisor
+          image: financial-advisor:v4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: GROQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: financial-advisor-secret
+                  key: GROQ_API_KEY
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: financial-advisor-secret
+                  key: DB_PASS
+            - name: DB_HOST
+              value: host.minikube.internal
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: apex_financial
+            - name: DB_USER
+              value: postgres
+            - name: PHOENIX_ENDPOINT
+              value: http://host.docker.internal:6006/v1/traces
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
