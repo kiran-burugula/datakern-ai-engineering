@@ -3,10 +3,10 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import random
 import os
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASS = os.getenv("DB_PASS", "Bkir@n014")
-DB_PORT = os.getenv("DB_PORT", "5432")
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_PORT = os.getenv("DB_PORT")
 DB_NAME = "apex_financial"
 SCHEMA_NAME = "advisory"
 

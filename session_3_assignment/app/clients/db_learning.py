@@ -3,7 +3,7 @@ import psycopg2
 
 from decimal import Decimal
 
-password = os.getenv("DB_PASS",'Bkir@n014')
+password = os.getenv("DB_PASS")
 
 connection = psycopg2.connect(
     host="localhost",

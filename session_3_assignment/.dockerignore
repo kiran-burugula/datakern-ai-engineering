@@ -1,6 +1,10 @@
 .venv/
 .env
 .git/
-__pycache__/
-*.pyc
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+tests/
+k8s/
+**/secret.yaml
 .phoenix-data/
